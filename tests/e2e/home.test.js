@@ -21,6 +21,6 @@ describe('home page', () => {
     const header = await driver.wait(until.elementLocated(By.css('h1')), 10000);
 
     await driver.wait(until.elementIsVisible(header), 10000);
-    await expect(header.getText()).resolves.toBe('Welcome to CI/CD');
+    await expect(header.getText()).resolves.toBe('Welcome to DevOps');
   });
 });
