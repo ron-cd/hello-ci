@@ -5,7 +5,7 @@ describe('home page', () => {
 
   beforeAll(async () => {
     driver = await new Builder()
-      .usingServer(process.env.SELENIUM_REMOTE_URL || 'http://127.0.0.1:7900/')
+      .usingServer(process.env.SELENIUM_REMOTE_URL || 'http://127.0.0.1:7900')
       .forBrowser('chrome')
       .build();
   });
