@@ -16,7 +16,7 @@ describe('home page', () => {
     }
   });
 
-  test('shows the welcome header', async () => {
+  test('Hello DevOps', async () => {
     await driver.get(process.env.APP_URL || 'http://127.0.0.1:3000');
     const header = await driver.wait(until.elementLocated(By.css('h1')), 10000);
 
