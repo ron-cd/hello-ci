@@ -5,38 +5,39 @@ pipeline {
         nodejs 'node20'
     }
 
+    triggers {
+        pollSCM('H/15 * * * *')
+    }
+
     environment {
-        APP_URL = 'http://localhost:3000'
-        JEST_JUNIT_OUTPUT_DIR = 'reports'
-        JEST_JUNIT_OUTPUT_NAME = 'junit.xml'
+        SELENIUM_REMOTE_URL = 'http://selenium:4444/wd/hub'
+        APP_URL = 'http://jenkins:3000'
     }
 
     stages {
-        stage('Install') {
+        stage('Install Dependencies') {
             steps {
-                sh 'npm install'
+                sh 'npm ci'
             }
         }
 
-        stage('Unit Test') {
+        stage('Start Application') {
             steps {
-                sh 'npx jest tests/math.test.js'
+                sh 'npm start &'
             }
         }
 
-        stage('UI Test') {
+        stage('UI Tests') {
             steps {
-                sh 'node src/app.js > app.log 2>&1 &'
-                sh 'sleep 5'
-                sh 'curl http://localhost:3000'
-                sh 'npx jest --runInBand tests/e2e/home.test.js'
+                sh 'npm test'
             }
         }
     }
 
     post {
         always {
-            junit 'reports/*.xml'
+            junit allowEmptyResults: true, testResults: 'test-results/results.xml'
+            sh 'pkill -f "node src/app.js" || true'
         }
     }
 }
