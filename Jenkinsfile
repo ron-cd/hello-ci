@@ -3,7 +3,7 @@ pipeline {
     tools { nodejs 'node20' }
     triggers { pollSCM('* * * * *') }
     environment {
-        APP_URL = 'http://127.0.0.1:3000'
+        APP_URL = 'http://localhost:3000/'
         SELENIUM_REMOTE_URL = 'http://selenium:4444/wd/hub'
         JEST_JUNIT_OUTPUT_DIR = 'reports'
         JEST_JUNIT_OUTPUT_NAME = 'junit.xml'
