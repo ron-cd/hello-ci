@@ -5,7 +5,7 @@ describe('home page', () => {
 
   beforeAll(async () => {
     driver = await new Builder()
-      .usingServer(process.env.SELENIUM_REMOTE_URL || 'http://127.0.0.1:4444/wd/hub')
+      .usingServer(process.env.SELENIUM_REMOTE_URL || 'http://127.0.0.1:7900/')
       .forBrowser('chrome')
       .build();
   });
@@ -17,7 +17,7 @@ describe('home page', () => {
   });
 
   test('Hello DevOps', async () => {
-    await driver.get(process.env.APP_URL || 'http://localhost:3000/');
+    await driver.get(process.env.APP_URL || 'http://127.0.0.1:3000');
     const header = await driver.wait(until.elementLocated(By.css('h1')), 10000);
 
     await driver.wait(until.elementIsVisible(header), 10000);
